@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:state_management_demo/model/model.dart';
+//import 'package:state_management_demo/model/model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(
+      home: HomePage(
         title: msg,
       ),
     );
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
+  HomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -34,12 +36,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController controllertext_fromfield_tongcustom =
       TextEditingController();
-  List<String> dataShow = [];
+  var data = Todo();
+  // List<String> dataShow = [];
   @override
   void initState() {
-    dataShow.add("parin01");
-    dataShow.add("parin02");
-    dataShow.add("parin03");
+    data.tasks.add(Tasks(role: "Sniper"));
+    data.tasks.add(Tasks(role: "pudge"));
+    data.tasks.add(Tasks(role: "Mirana"));
+    // dataShow.add("parin01");
+    // dataShow.add("parin02");
+    // dataShow.add("parin03");
   }
 
   @override
@@ -50,13 +56,13 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: ListView(
-              children: dataShow
+              children: data.tasks
                   .map((e) => ListTile(
-                      title: Text(e),
+                      title: Text(e.role),
                       trailing: IconButton(
                           onPressed: () {
                             setState(() {
-                              dataShow.remove(e);
+                              data.tasks.remove(e);
                             });
                           },
                           icon: Image.asset("assets/Icons/bin.png"))))
@@ -73,7 +79,9 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                   onPressed: () {
                     setState(() {
-                      dataShow.add(controllertext_fromfield_tongcustom.text);
+                      data.tasks.add(Tasks(
+                          role: controllertext_fromfield_tongcustom.text));
+                      controllertext_fromfield_tongcustom.clear();
                     });
                   },
                   child: Text("ADD"))

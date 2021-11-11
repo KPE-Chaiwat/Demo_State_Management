@@ -7,11 +7,10 @@ class Tasks {
 class Todo {
   late List<Tasks> tasks;
   Todo({List<Tasks>? inittasks}) {
-    // if (tasks != null) {
-    //   tasks = inittasks!;
-    // } else {
-    //   tasks = [];
-    // }
     tasks = inittasks ?? [];
+  }
+
+  Todo.form(Todo old) {
+    this.tasks = old.tasks;
   }
 }

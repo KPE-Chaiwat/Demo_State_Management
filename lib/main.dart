@@ -43,9 +43,7 @@ class _HomePageState extends State<HomePage> {
     data.tasks.add(Tasks(role: "Sniper"));
     data.tasks.add(Tasks(role: "pudge"));
     data.tasks.add(Tasks(role: "Mirana"));
-    // dataShow.add("parin01");
-    // dataShow.add("parin02");
-    // dataShow.add("parin03");
+    super.initState();
   }
 
   @override
